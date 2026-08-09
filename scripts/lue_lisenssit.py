@@ -45,8 +45,12 @@ def classify(license_text, copyright_text):
         return "Tuntematon-metadata"
     return "Ei-metatietoa"
 
-fonts = list(FONT_DIR.rglob("*.ttf")) + list(FONT_DIR.rglob("*.otf")) + \
-        list(FONT_DIR.rglob("*.TTF")) + list(FONT_DIR.rglob("*.OTF"))
+VAPAAT_DIR = FONT_DIR / "vapaat"
+
+fonts = [p for p in
+         list(FONT_DIR.rglob("*.ttf")) + list(FONT_DIR.rglob("*.otf")) +
+         list(FONT_DIR.rglob("*.TTF")) + list(FONT_DIR.rglob("*.OTF"))
+         if VAPAAT_DIR not in p.parents]
 
 print(f"Käsitellään {len(fonts)} fonttia...", flush=True)
 
